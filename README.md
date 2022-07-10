@@ -30,7 +30,7 @@ Docker-compose 3.8
 
 - Для развёртывания проекта необходимо скачать его в нужную вам директорию, например:
 
-```git clone git@github.com:sapphirehead/infra_sp2.git```
+``` git clone git@github.com:sapphirehead/infra_sp2.git ```
 
 - В директории infra создайте файл .env с переменными окружения для работы с базой данных:
 
@@ -45,81 +45,81 @@ DB_PORT=5432 # порт для подключения к БД
 ```
 
 
-- Из папки ```infra/``` разверните контейнеры в новой структуре:
+- Из папки ``` infra/ ``` разверните контейнеры в новой структуре:
 
 - Для запуска необходимо выполнить из директории с проектом команду:
 
-```sudo docker-compose up -d```
+``` sudo docker-compose up -d ```
 
 _Для пересборки команда up выполняется с параметром --build_
 
-```sudo docker-compose up -d --build```
+``` sudo docker-compose up -d --build ```
 
 - Теперь в контейнере web нужно выполнить миграции:
 
-```sudo docker-compose exec web python manage.py migrate```
+``` sudo docker-compose exec web python manage.py migrate ```
 
 - Создать суперпользователя:
 
-```sudo docker-compose exec web python manage.py createsuperuser```
+``` sudo docker-compose exec web python manage.py createsuperuser ```
 
 - Собрать статику:
 
-```sudo docker-compose exec web python manage.py collectstatic --no-input```
+``` sudo docker-compose exec web python manage.py collectstatic --no-input ```
 
 - Вы также можете создать дамп (резервную копию) базы:
 
-```sudo docker-compose exec web python manage.py dumpdata > fixtures.json```
+``` sudo docker-compose exec web python manage.py dumpdata > fixtures.json ```
 
 - или, разместив, например, файл fixtures.json в папке с Dockerfile, загрузить в базу данные из дампа:
 
-```sudo docker-compose exec web python manage.py loaddata fixtures.json```
+``` sudo docker-compose exec web python manage.py loaddata fixtures.json ```
 
 ### Некоторые полезные команды:
 
 - Локально создать образ с нужным названием и тегом:
 
-```docker build -t <username>/<imagename>:<tag> .```
+``` docker build -t <username>/<imagename>:<tag> . ```
 
 - Авторизоваться через консоль:
-```docker login```
+``` docker login ```
 - А можно сразу указать имя пользователя
-```docker login -u <username>```
+``` docker login -u <username> ```
 - Загрузить образ на DockerHub:
-```docker push <username>/<imagename>:<tag>```
+``` docker push <username>/<imagename>:<tag> ```
 
 - Проверить файлы в корне проекта:
 
-```sudo docker-compose exec web ls -a```
+``` sudo docker-compose exec web ls -a ```
 
 - Остановка всех контейнеров:
 
-```sudo docker-compose down```
+``` sudo docker-compose down ```
 
 - Мониторинг запущенных контейнеров:
 
-```sudo docker stats```
+``` sudo docker stats ```
 
 - Команда покажет, сколько места на диске занимают образы, контейнеры, тома и билд-кеш.
 
-```sudo docker system df```
+``` sudo docker system df ```
 
 
 - Останавливаем и удаляем контейнеры, сети, тома вместе со всеми зависимостями. Осталются только образы:
 
-```sudo docker-compose down -v```
+``` sudo docker-compose down -v ```
 
 - Остановить проект сохранив данные в БД:
 
-```docker-compose down```
+``` docker-compose down ```
 
 - Остановить проект удалив данные в БД:
 
-```docker-compose down --volumes```
+``` docker-compose down --volumes ```
 
 - Удалить всё, что не используется (неиспользуемые образы, остановленные контейнеры, тома, которые не использует ни один контейнер, билд-кеш)
 
-```sudo docker system prune```
+``` sudo docker system prune ```
 
 _Документация: Примеры обращений к эндпоинтам находятся по адресу:_
 
